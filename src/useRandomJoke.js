@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 
-function useRandomJoke( fName, lName){
+function useRandomJoke( fName){
     const [joke, setJoke] = useState('');
 
     useEffect(() =>{
         const fetchJoke = async() =>
         await fetch(
-            `http://api.icndb.com/jokes/random?firstName=${fName}&lastName=${lName}`
+            `http://api.icndb.com/jokes/random?firstName=${fName}`
         )
             .then((res) => res.json())
             .then((data) =>{
@@ -15,7 +15,7 @@ function useRandomJoke( fName, lName){
         
 
         fetchJoke();
-    }, [fName, lName]);
+    }, [fName]);
 
     return joke;
 }

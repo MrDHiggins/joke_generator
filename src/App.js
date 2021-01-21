@@ -6,19 +6,23 @@ function App() {
 
   //useRef => Point useRef at an element to provide appropriate ref
   const firstNameRef = useRef(null)
-  const lastNameRef = useRef(null);
 
   const [fName, setFName] = useState("Dyllan");
-  const [lName, setLName] = useState("Higgins");
 
-  const joke = useRandomJoke(fName, lName);
+  const joke = useRandomJoke(fName);
 
   //custom hook
   const generateJoke = (e) =>{
+    e.onKeyDown = 'Enter'
     e.preventDefault();
     setFName(firstNameRef.current.value);
-    setLName(lastNameRef.current.value);
   }
+
+  const enterKeyDown = (e)=>{
+    e.onKeyDown='Enter';
+  }
+
+
 
 
   return (
@@ -33,13 +37,8 @@ function App() {
           <input
             type="text" 
             placeholder="First Name"
-            ref={firstNameRef}/>
-
-          {/*Last Name Input*/}
-          <input
-            type="text" 
-            placeholder="last Name"
-            ref={lastNameRef}/>
+            ref={firstNameRef}
+            onKeyDown={enterKeyDown}/>
         </form>
 
         <button onClick={generateJoke}>Generate Joke</button>
